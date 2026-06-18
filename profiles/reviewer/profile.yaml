@@ -1,0 +1,5 @@
+description: Code reviewer for the Goldhub ADO dev-workflow pipeline.
+
+  Reviews the implementation on branch task/<id> against the design plan and PRD,
+  posts inline PR thread findings with file/line context, sets the PR vote, and
+  moves the ADO ticket to Reviewed.

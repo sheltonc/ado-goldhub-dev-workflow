@@ -1,0 +1,4 @@
+description: | 
+  Codier for the Goldhub ADO DEV Workflow.
+  Creates a coding implementation based on the provided prd.md and plan.md
+description_auto: false

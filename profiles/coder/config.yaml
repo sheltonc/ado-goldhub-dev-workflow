@@ -1,0 +1,8 @@
+model:
+  default: deepseek/deepseek-v4-flash
+  provider: deepseek
+onboarding:
+  seen:
+    tool_progress_prompt: true
+agent:
+  max_turns: 300

@@ -1,0 +1,45 @@
+#!/home/cshelton/.hermes/venvs/azdo/bin/python
+"""azdo — thin dispatcher: `azdo boards ...` / `azdo prs ...`"""
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+SKILL_DIR = Path(__file__).resolve().parent  # .../scripts
+SKILLS_ROOT = SKILL_DIR.parent  # .../azure-devops
+
+USAGE = """azdo — Azure DevOps skill CLI
+
+Usage:
+    azdo boards <subcommand> [...]
+    azdo prs    <subcommand> [...]
+
+Requires env vars in the calling agent profile:
+    AZDO_PAT      Personal Access Token
+    AZDO_ORG      e.g. https://dev.azure.com/myorg
+    AZDO_PROJECT  Default project name (override with --project)
+"""
+
+
+def main() -> None:
+    args = sys.argv[1:]
+    if not args or args[0] in ("-h", "--help", "help"):
+        print(USAGE)
+        sys.exit(0)
+
+    feature = args[0]
+    if feature == "boards":
+        target = SKILL_DIR / "azdo_boards.py"
+    elif feature == "prs":
+        target = SKILL_DIR / "azdo_prs.py"
+    else:
+        sys.stderr.write(f"ERROR: unknown feature '{feature}'. Use 'boards' or 'prs'.\n")
+        sys.exit(2)
+
+    # Re-exec the feature script with the remaining args.
+    sys.argv = [str(target), *args[1:]]
+    exec(compile(target.read_text(), str(target), "exec"), {"__name__": "__main__", "__file__": str(target)})
+
+
+if __name__ == "__main__":
+    main()
