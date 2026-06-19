@@ -8,7 +8,7 @@ __pycache__
 **/.env
 .env
 **/taps.json
-**/skills_prompt_snapshot.json
+**/.skills_prompt_snapshot.json
 **/.update_check
 **/auth_lock
 **/models_dev_cache*
