@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "manifest": {
+    "azure-devops/SKILL.md": [
+      1781791077848644818,
+      24348
+    ]
+  },
+  "skills": [
+    {
+      "skill_name": "azure-devops",
+      "category": "azure-devops",
+      "frontmatter_name": "azure-devops",
+      "description": "Interact with Azure DevOps Boards (work items) and Pull R...",
+      "platforms": [],
+      "conditions": {
+        "fallback_for_toolsets": [],
+        "requires_toolsets": [],
+        "fallback_for_tools": [],
+        "requires_tools": []
+      }
+    }
+  ],
+  "category_descriptions": {}
+}
