@@ -52,8 +52,8 @@ DISPATCH_RULES = [
     {
         "from_state": "Ready for Design",
         "to_state": "Design",
-        "assign_to": "agent.cshelton@gmail.com",
-        "label": "Design Agent",
+        "assign_to": "dev.cshelton@gmail.com",
+        "label": "Coding Agent",
         "phase": "design",
     },
     {
@@ -66,8 +66,8 @@ DISPATCH_RULES = [
     {
         "from_state": "Ready for Review",
         "to_state": "Review",
-        "assign_to": "kcaonsirhc@gmail.com",
-        "label": "Review Agent",
+        "assign_to": "dev.cshelton@gmail.com",
+        "label": "Coding Agent",
         "phase": "review",
     },
 ]
@@ -174,19 +174,10 @@ PHASE_SKILLS = {
 def build_kanban_body(ticket_id: int, phase: str, title: str) -> str:
     """Minimal card body. Worker fetches the rest from ADO."""
     lines = [
-        f"ado_ticket: {ticket_id}",
         f"ado_project: {PROJECT}",
-        f"phase: {phase}",
-        f"workspace: ~/.hermes/workspaces/{ticket_id}/",
-        f"branch: task/{ticket_id}" if phase != "design" else "branch: (created by designer on first dev dispatch)",
-        "",
-        f"title: {title}",
-        "",
-        "Worker: fetch your own context from ADO at the start of your run:",
-        "  - PRD (System.Description) → write to <workspace>/PRD.md",
-        "  - full comment thread → write to <workspace>/task_comments.md",
-        "  - PR threads <workspace>/pr_threads.md",
-        "Use the `azure-devops` skill (`azdo boards show <id>`, `azdo boards comments <id>`, `azdo prs threads ...`).",
+        f"ado_ticket: {ticket_id}",
+        f"ado_title: {title}",
+        f"workspace: ~/.hermes/workspaces/{ticket_id}/"
     ]
     return "\n".join(lines)
 

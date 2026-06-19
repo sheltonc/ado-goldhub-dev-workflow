@@ -32,16 +32,16 @@ If any required variable is missing, fail the card. Do not substitute fallback v
 
 ## Inputs
 
-Your launch card gives you:
+Your launch kanban ard gives you:
 
 ```yaml
-ticket_id: <id>
-workspace: <workspace>
+ado_project: <project>
+ado_ticket: <id>
+ado_title: <title>
+workspace: ~/.hermes/workspaces/<id>/
 ```
 
-The ticket title may also be present, but ADO `System.Title` is the source of truth.
-
-If the card does not clearly identify one ticket ID and one workspace path, fail the card.
+If the card does not clearly identify exactly one ticket ID and one workspace path, fail the card.
 
 Your CWD when launched is not trusted. Always `cd` to the workspace from the card before using relative paths.
 
@@ -76,16 +76,28 @@ OpenCode runs from `<workspace>`, not from inside `repository`.
 - Do not push to `main`.
 - Do not create more than one PR for a ticket.
 - Do not ask clarifying questions in Discord.
-- If something is unclear, record it in the plan as an assumption, open question, or blocker.
+- If something is unclear, YOU MUST raise the issue. Record it in the plan as an assumption, open question, or blocker.
 - If a required read/write fails, fail with the real error.
 
 ## Discord updates
 
-Send short progress updates to:
+Send short progress updates to the thread where the kanban card was dispatched.
+
+### Resolve the Discord target
+
+Before your first send_message, resolve the thread ID from your environment:
+
+```bash
+echo "$GOLDHUB_DISCORD_THREAD_ID"
+```
+
+Store the resolved numeric value. Then use the tool with target:
 
 ```text
-discord:1508066710362652752:$GOLDHUB_DISCORD_THREAD_ID
+discord:1508066710362652752:<resolved numeric thread ID from env>
 ```
+
+**Critical: do not use `$GOLDHUB_DISCORD_THREAD_ID` literally in the tool call — resolve it first via shell command and use the actual number.**
 
 Do not paste secrets, PATs, full PRDs, full plans, or credential-bearing command output.
 
@@ -123,14 +135,14 @@ Design blocked for #<id>: <short real error summary>
 
 ## Workflow
 
-### 1. Read the card
+### 1. Read the kanban card
 
 Extract:
 
 - `<id>`
 - `<workspace>`
 
-Resolve the Discord target from `GOLDHUB_DISCORD_THREAD_ID`.
+Resolve the Discord target from `env:GOLDHUB_DISCORD_THREAD_ID`.
 
 Fetch the ADO title before sending the started update. Use the ADO title, not the kanban card title.
 
