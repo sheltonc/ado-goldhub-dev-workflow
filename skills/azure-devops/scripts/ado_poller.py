@@ -178,14 +178,14 @@ def build_kanban_body(ticket_id: int, phase: str, title: str) -> str:
         f"ado_project: {PROJECT}",
         f"phase: {phase}",
         f"workspace: ~/.hermes/workspaces/{ticket_id}/",
-        f"branch: task/{ticket_id}" if phase != "design" else "branch: (created by coder on first dev dispatch)",
+        f"branch: task/{ticket_id}" if phase != "design" else "branch: (created by designer on first dev dispatch)",
         "",
         f"title: {title}",
         "",
         "Worker: fetch your own context from ADO at the start of your run:",
         "  - PRD (System.Description) → write to <workspace>/PRD.md",
         "  - full comment thread → write to <workspace>/task_comments.md",
-        "  - if fix-card or review phase, fetch active PR threads → write to <workspace>/pr_threads.md",
+        "  - PR threads <workspace>/pr_threads.md",
         "Use the `azure-devops` skill (`azdo boards show <id>`, `azdo boards comments <id>`, `azdo prs threads ...`).",
     ]
     return "\n".join(lines)

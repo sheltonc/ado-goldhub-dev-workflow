@@ -22,6 +22,9 @@ In this document they are referenced as `env:<VARIABLE_NAME>`.
 When running shell commands, use the real shell variable form, for example:
 
 ```bash
+"$GOLDHUB_AZDO_ORG"
+"$GOLDHUB_AZDO_PROJECT"
+"$GOLDHUB_AZDO_PAT"
 "$OPENCODE_MODEL"
 "$GOLDHUB_DISCORD_THREAD_ID"
 "$REVIEWER"
@@ -368,6 +371,8 @@ Your implementation must:
 - Write tests as described in the plan's test strategy.
 - Not modify files outside the repository/ worktree.
 - Not modify tasks/<id>/prd.md or tasks/<id>/plan.md.
+- run `dotnet build` as many times as is required to ensure the project builds without errors.
+- run `dotnet test` as many times as is required to ensure the project tests all run without any failures - you can run all tests.
 
 If the plan is ambiguous or incomplete, list your open questions in a file at:
   repository/tasks/<id>/BLOCKED.md
